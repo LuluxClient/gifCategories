@@ -5,7 +5,7 @@
  */
 
 import { DataStore } from "@api/index";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 import * as CollectionManager from "../CollectionManager";
 import { DATA_COLLECTION_NAME } from "../constants";
@@ -102,17 +102,9 @@ export async function uploadGifCollections(showToast = true): Promise<void> {
 }
 
 function toastSuccess() {
-    Toasts.show({
-        type: Toasts.Type.SUCCESS,
-        message: "Collections imported successfully.",
-        id: Toasts.genId(),
-    });
+    showToast({ text: "Collections imported successfully.", variant: "success" });
 }
 
 function toastFailure(err: unknown) {
-    Toasts.show({
-        type: Toasts.Type.FAILURE,
-        message: `Failed to import collections: ${String(err)}`,
-        id: Toasts.genId(),
-    });
+    showToast({ text: `Failed to import collections: ${String(err)}`, variant: "critical" });
 }

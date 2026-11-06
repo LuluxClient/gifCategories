@@ -5,7 +5,7 @@
  */
 
 import { DataStore } from "@api/index";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 import { DATA_COLLECTION_NAME, GIF_COLLECTION_PREFIX } from "./constants";
 import { Collection, Gif } from "./types";
@@ -35,15 +35,7 @@ export async function createCollection(name: string, gifs: Gif[]): Promise<void>
     const collections = await getCollections();
     const duplicateCollection = collections.find(c => c.name === `${GIF_COLLECTION_PREFIX}${name}`);
     if (duplicateCollection) {
-        Toasts.show({
-            message: "That collection already exists",
-            type: Toasts.Type.FAILURE,
-            id: Toasts.genId(),
-            options: {
-                duration: 3000,
-                position: Toasts.Position.BOTTOM,
-            },
-        });
+        showToast({ text: "That collection already exists", variant: "critical", duration: 3000, position: "bottom" });
         return;
     }
 
@@ -146,12 +138,7 @@ export async function deleteCollection(name: string): Promise<void> {
 export async function renameCollection(oldFullName: string, newDisplayName: string): Promise<boolean> {
     const trimmed = newDisplayName.trim();
     if (!trimmed) {
-        Toasts.show({
-            message: "Folder name can't be empty",
-            type: Toasts.Type.FAILURE,
-            id: Toasts.genId(),
-            options: { duration: 3000, position: Toasts.Position.BOTTOM },
-        });
+        showToast({ text: "Folder name can't be empty", variant: "critical", duration: 3000, position: "bottom" });
         return false;
     }
 
@@ -169,12 +156,7 @@ export async function renameCollection(oldFullName: string, newDisplayName: stri
     const collections = await getCollections();
 
     if (collections.some(c => c.name === newFullName)) {
-        Toasts.show({
-            message: "A folder with that name already exists",
-            type: Toasts.Type.FAILURE,
-            id: Toasts.genId(),
-            options: { duration: 3000, position: Toasts.Position.BOTTOM },
-        });
+        showToast({ text: "A folder with that name already exists", variant: "critical", duration: 3000, position: "bottom" });
         return false;
     }
 

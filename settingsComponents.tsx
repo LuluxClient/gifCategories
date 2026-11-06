@@ -5,7 +5,8 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Alerts, Button } from "@webpack/common";
+import { Button } from "@components/Button";
+import { Alerts } from "@webpack/common";
 
 import * as CollectionManager from "./CollectionManager";
 import { downloadCollections, uploadGifCollections } from "./utils/settingsUtils";
@@ -20,7 +21,7 @@ export function ImportCollectionsButton() {
                             title: "Are you sure?",
                             body: "Importing collections will overwrite your current collections.",
                             confirmText: "Import",
-                            confirmColor: Button.Colors.RED,
+                            confirmColor: "red",
                             cancelText: "Nevermind",
                             onConfirm: async () => uploadGifCollections(),
                         })

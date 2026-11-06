@@ -6,9 +6,10 @@
 
 import { addContextMenuPatch, findGroupChildrenByChildId, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading } from "@components/Heading";
 import definePlugin from "@utils/types";
 import { RenderModalProps } from "@vencord/discord-types";
-import { Alerts, Button, ContextMenuApi, FluxDispatcher, Forms, Menu, Modal, openModal, React, TextInput, useState } from "@webpack/common";
+import { Alerts, ContextMenuApi, FluxDispatcher, Menu, Modal, openModal, React, TextInput, useState } from "@webpack/common";
 
 import * as CollectionManager from "./CollectionManager";
 import { GIF_COLLECTION_PREFIX, GIF_ITEM_PREFIX } from "./constants";
@@ -469,7 +470,7 @@ function RemoveItemContextMenu(props: {
                         title: "Are you sure?",
                         body: "Do you really want to delete this folder?",
                         cancelText: "Nevermind",
-                        confirmColor: Button.Colors.RED,
+                        confirmColor: "red",
                         confirmText: "Delete",
                         onConfirm: async () => {
                             await CollectionManager.deleteCollection(nameOrId);
@@ -519,9 +520,9 @@ function RenameFolderModal(props: {
             }]}
             title="Rename GIF folder"
         >
-            <Forms.FormTitle style={{ marginTop: "10px" }} tag="h5">
+            <Heading style={{ marginTop: "10px" }} tag="h5">
                 New name
-            </Forms.FormTitle>
+            </Heading>
             <TextInput onChange={setName} placeholder="Folder name" value={name} />
         </Modal>
     );
@@ -582,9 +583,9 @@ function CreateCollectionModal({ gif, modalProps }: { gif: Gif; modalProps: Rend
             }]}
             title="Create GIF folder"
         >
-            <Forms.FormTitle style={{ marginTop: "10px" }} tag="h5">
+            <Heading style={{ marginTop: "10px" }} tag="h5">
                 Folder name
-            </Forms.FormTitle>
+            </Heading>
             <TextInput onChange={setName} placeholder="Cats, vibes, rage…" value={name} />
         </Modal>
     );

@@ -5,7 +5,7 @@
  */
 
 import { MessageStore, SnowflakeUtils } from "@webpack/common";
-import { Message } from "discord-types/general";
+import type { Message } from "@vencord/discord-types";
 
 import { Gif } from "../types";
 import { cleanUrl } from "./cleanUrl";
